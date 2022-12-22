@@ -7,13 +7,16 @@ using BBC_News_Classification.Detectors.Concretes;
 using BBC_News_Classification.Models;
 using CsvHelper;
 
-ICategoryDetector categoryDetector = new CategoryDetector("C:\\Users\\berat\\Desktop\\BBC News Train.csv");
+var trainingPath = "C:\\Users\\berat\\source\\repos\\BBC News Classification\\BBC News Classification\\files\\BBC News Train.csv";
+var testPath = "C:\\Users\\berat\\source\\repos\\BBC News Classification\\BBC News Classification\\files\\BBC News Test.csv";
+
+ICategoryDetector categoryDetector = new CategoryDetector(trainingPath);
 categoryDetector.DetectCategories();
 
-IWordDetector wordDetector = new WordDetector("C:\\Users\\berat\\Desktop\\BBC News Train.csv");
+IWordDetector wordDetector = new WordDetector(trainingPath);
 wordDetector.DetectMostUsageWordByCategory();
 
-INewsClassification classification = new NewsClassification("C:\\Users\\berat\\Desktop\\BBC News Test.csv");
+INewsClassification classification = new NewsClassification(testPath); 
 classification.DetectNewsCategory();
 
 var item2 = CacheableData.Words.GroupBy(t => t.Category).ToList();
